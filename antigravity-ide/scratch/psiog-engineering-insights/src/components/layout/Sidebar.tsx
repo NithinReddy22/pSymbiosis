@@ -1,154 +1,111 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
 import {
-  LayoutDashboard,
-  FolderGit2,
-  UserCheck,
-  Fingerprint,
-  Cpu,
-  FileSpreadsheet,
-  Sliders,
-  Sparkles,
-  Layers,
-  ShieldAlert
+  Home, User, FolderKanban, BarChart2, Sparkles,
+  Database, Building2, ShieldCheck, Settings,
+  HelpCircle, Sliders, Tag, TrendingUp, LucideIcon,
 } from 'lucide-react';
 import { findUnmatchedActivities } from '../../services/identityResolution';
 
+const PsiogWordmark: React.FC = () => (
+  <span className="sidebar-logo-text">
+    <span className="t">psi</span><span className="l">og</span>
+  </span>
+);
+
 export const Sidebar: React.FC = () => {
   const {
-    activeTab,
-    setActiveTab,
-    userRole,
-    identities,
-    tickets,
-    prs,
-    reviews,
-    tests,
-    docs,
-    allReports
+    activeTab, setActiveTab, userRole,
+    identities, tickets, prs, reviews, tests, docs, allReports,
   } = useApp();
 
-  // Count unmatched orphan activities
-  const orphanActivities = findUnmatchedActivities(identities, tickets, prs, reviews, tests, docs);
+  const orphanCount = findUnmatchedActivities(identities, tickets, prs, reviews, tests, docs).length;
+  const alertCount = allReports.reduce((s, r) => s + r.antiGamingFlags.length, 0);
 
-  // Count total anti-gaming flags across reports
-  const totalAntiGamingAlerts = allReports.reduce((sum, r) => sum + r.antiGamingFlags.length, 0);
+  const isEngineer = userRole === 'Engineer';
+  const isLead = userRole === 'Lead' || userRole === 'Delivery Head' || userRole === 'Admin';
+  const isHead = userRole === 'Delivery Head' || userRole === 'Admin';
 
-  const navItems = [
-    // Dashboards
-    {
-      id: 'overview',
-      label: 'Executive Overview',
-      icon: LayoutDashboard,
-      roles: ['Delivery Head', 'Admin'],
-      section: 'Dashboards'
-    },
-    {
-      id: 'project',
-      label: 'Project in Focus',
-      icon: FolderGit2,
-      roles: ['Lead', 'Delivery Head', 'Admin'],
-      section: 'Dashboards'
-    },
-    {
-      id: 'associate',
-      label: userRole === 'Engineer' ? 'My Performance View' : 'Associate in Focus',
-      icon: UserCheck,
-      roles: ['Engineer', 'Lead', 'Delivery Head', 'Admin'],
-      section: 'Dashboards'
-    },
+  type NavItem = {
+    id: string;
+    label: string;
+    icon: LucideIcon;
+    badge?: string;
+    badgeAlert?: boolean;
+    show?: boolean;
+  };
 
-    // Platform Intelligence
-    {
-      id: 'ai-insights',
-      label: 'AI & Anti-Gaming',
-      icon: Sparkles,
-      roles: ['Engineer', 'Lead', 'Delivery Head', 'Admin'],
-      badge: totalAntiGamingAlerts > 0 ? `${totalAntiGamingAlerts} Alerts` : undefined,
-      badgeAlert: true,
-      section: 'Intelligence & Trust'
-    },
-    {
-      id: 'identity',
-      label: 'Identity Resolution',
-      icon: Fingerprint,
-      roles: ['Lead', 'Delivery Head', 'Admin'],
-      badge: orphanActivities.length > 0 ? `${orphanActivities.length} Orphans` : undefined,
-      section: 'Data Operations'
-    },
-    {
-      id: 'connectors',
-      label: 'Connectors & Mappings',
-      icon: Cpu,
-      roles: ['Delivery Head', 'Admin'],
-      section: 'Data Operations'
-    },
-    {
-      id: 'manual-data',
-      label: 'Manual Entry & Audit',
-      icon: FileSpreadsheet,
-      roles: ['Engineer', 'Lead', 'Delivery Head', 'Admin'],
-      section: 'Data Operations'
-    },
-    {
-      id: 'models',
-      label: 'Model Configuration',
-      icon: Sliders,
-      roles: ['Delivery Head', 'Admin'],
-      section: 'Governance'
-    }
+  const mainNav: NavItem[] = [
+    { id: 'home',      label: 'Home',           icon: Home,        show: true },
+    { id: 'associate', label: 'My Performance',  icon: User,        show: true },
+    { id: 'project',   label: 'Projects',        icon: FolderKanban, show: isLead },
+    { id: 'overview',  label: 'Reports',         icon: BarChart2,   show: isHead },
+    { id: 'delivery',  label: 'Service Delivery', icon: TrendingUp,  show: isLead },
+    { id: 'ai-insights', label: 'AI Insights',   icon: Sparkles,
+      badge: alertCount > 0 ? `${alertCount}` : undefined,
+      badgeAlert: true, show: true },
   ];
 
-  // Filter items visible to current role
-  const visibleItems = navItems.filter(item => item.roles.includes(userRole));
+  const adminNav: NavItem[] = [
+    { id: 'jira',         label: 'Jira Summary',        icon: Tag,           show: true },
+    { id: 'connectors',   label: 'Data & Integrations', icon: Database,      show: isHead },
+    { id: 'identity',     label: 'Organization',        icon: Building2,
+      badge: orphanCount > 0 ? `${orphanCount}` : undefined, show: isLead },
+    { id: 'models',       label: 'Performance Model',   icon: Sliders,       show: isHead },
+    { id: 'identity',     label: 'Users & Access',      icon: ShieldCheck,   show: isHead },
+    { id: 'manual-data',  label: 'Settings',            icon: Settings,      show: true },
+  ];
 
-  // Group by sections
-  const sections = ['Dashboards', 'Intelligence & Trust', 'Data Operations', 'Governance'];
+  const visibleMain  = mainNav.filter(i => i.show !== false);
+  const visibleAdmin = adminNav.filter(i => i.show !== false);
+  const showAdmin    = visibleAdmin.length > 0;
+
+  const NavBtn: React.FC<Omit<NavItem, 'show'>> = ({ id, label, icon: Icon, badge, badgeAlert }) => (
+    <button
+      className={`nav-item ${activeTab === id ? 'active' : ''}`}
+      onClick={() => setActiveTab(id)}
+    >
+      <Icon size={17} />
+      <span style={{ flex: 1 }}>{label}</span>
+      {badge && (
+        <span className={`nav-badge${badgeAlert ? ' alert' : ''}`}>{badge}</span>
+      )}
+    </button>
+  );
 
   return (
     <aside className="sidebar">
+      {/* Logo */}
       <div className="sidebar-header">
-        <div className="brand-icon">
-          <Layers size={22} />
-        </div>
-        <div>
-          <div className="brand-title">Psiog Pulse</div>
-          <div className="brand-subtitle">Engineering Insights</div>
-        </div>
+        <PsiogWordmark />
       </div>
 
+      {/* Main nav */}
       <nav className="sidebar-nav">
-        {sections.map(secName => {
-          const itemsInSec = visibleItems.filter(i => i.section === secName);
-          if (itemsInSec.length === 0) return null;
+        {visibleMain.map(item => <NavBtn key={item.id + item.label} {...item} />)}
 
-          return (
-            <div key={secName}>
-              <div className="nav-section-title">{secName}</div>
-              {itemsInSec.map(item => {
-                const Icon = item.icon;
-                const isActive = activeTab === item.id;
+        {/* Admin section */}
+        {showAdmin && (
+          <>
+            <div className="nav-section-title">Admin</div>
+            {visibleAdmin.map(item => <NavBtn key={item.id + item.label} {...item} />)}
+          </>
+        )}
 
-                return (
-                  <button
-                    key={item.id}
-                    className={`nav-item ${isActive ? 'active' : ''}`}
-                    onClick={() => setActiveTab(item.id)}
-                    style={{ width: '100%', background: 'none', border: 'none', textAlign: 'left' }}
-                  >
-                    <Icon size={18} />
-                    <span>{item.label}</span>
-                    {item.badge && (
-                      <span className={`nav-badge ${item.badgeAlert ? 'alert' : ''}`}>
-                        {item.badge}
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-          );
-        })}
+        {/* Spacer */}
+        <div style={{ flex: 1 }} />
+
+        {/* Help at bottom */}
+        <div className="sidebar-footer" style={{ marginTop: '8px' }}>
+          <button
+            className="nav-item"
+            style={{ color: 'var(--text-dim)' }}
+            onClick={() => {/* no-op */}}
+          >
+            <HelpCircle size={17} />
+            <span>Help &amp; Support</span>
+          </button>
+        </div>
       </nav>
     </aside>
   );

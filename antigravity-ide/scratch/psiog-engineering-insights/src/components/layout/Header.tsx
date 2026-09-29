@@ -1,144 +1,125 @@
 import React, { useState } from 'react';
 import { useApp, DatePeriod } from '../../context/AppContext';
 import { UserRole } from '../../types';
-import { Calendar, RefreshCw, Shield, User, Check, Sparkles, BookOpen } from 'lucide-react';
-import { CriteriaGuideModal } from '../common/CriteriaGuideModal';
+import { Search, Calendar, Bell, ChevronDown, RefreshCw, Check } from 'lucide-react';
 
 export const Header: React.FC = () => {
   const {
-    userRole,
-    setUserRole,
-    currentUserId,
-    setCurrentUserId,
-    associates,
-    activeAssociate,
-    selectedPeriod,
-    setSelectedPeriod,
-    triggerSync
+    userRole, setUserRole, currentUserId, setCurrentUserId,
+    associates, activeAssociate, selectedPeriod, setSelectedPeriod, triggerSync,
   } = useApp();
 
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncFeedback, setSyncFeedback] = useState<string | null>(null);
-  const [showGuide, setShowGuide] = useState(false);
+  const [searchVal, setSearchVal] = useState('');
 
   const periods: DatePeriod[] = [
-    { start: '2026-01-01', end: '2026-03-31', label: 'Q1 2026 (Active Period)' },
-    { start: '2025-10-01', end: '2025-12-31', label: 'Q4 2025 (Historical)' },
-    { start: '2025-01-01', end: '2025-12-31', label: 'Full Year 2025' }
+    { start: '2026-10-01', end: '2026-12-31', label: 'Oct 1, 2026 – Dec 31, 2026' },
+    { start: '2026-07-01', end: '2026-09-30', label: 'Jul 1, 2026 – Sep 30, 2026' },
+    { start: '2026-01-01', end: '2026-03-31', label: 'Jan 1, 2026 – Mar 31, 2026' },
+    { start: '2025-10-01', end: '2025-12-31', label: 'Oct 1, 2025 – Dec 31, 2025' },
   ];
 
   const handleRoleChange = (role: UserRole) => {
     setUserRole(role);
-    // Automatically switch active user to match the persona role for demo convenience
-    if (role === 'Engineer') {
-      setCurrentUserId('A004'); // Elena Rostova (Engineer)
-    } else if (role === 'Lead') {
-      setCurrentUserId('A003'); // Marcus Chen (Lead)
-    } else if (role === 'Delivery Head') {
-      setCurrentUserId('A006'); // Sarah Jenkins (VP Delivery)
-    }
+    if (role === 'Engineer') setCurrentUserId('A004');
+    else if (role === 'Lead') setCurrentUserId('A003');
+    else setCurrentUserId('A006');
   };
 
-  const handleSyncNow = () => {
+  const handleSync = () => {
     setIsSyncing(true);
     setTimeout(() => {
       const res = triggerSync();
       setIsSyncing(false);
-      setSyncFeedback(`Delta sync complete: +${res.inserted} new events`);
-      setTimeout(() => setSyncFeedback(null), 3500);
+      setSyncFeedback(`+${res.inserted} synced`);
+      setTimeout(() => setSyncFeedback(null), 3000);
     }, 800);
   };
 
+  /* Initials for avatar */
+  const initials = activeAssociate
+    ? activeAssociate.name.split(' ').map(n => n[0]).join('').slice(0, 2)
+    : 'NR';
+
   return (
     <header className="top-header">
+      {/* Search */}
       <div className="header-left">
-        {/* Period Selector (Criteria 7) */}
-        <div className="period-selector">
-          <Calendar size={15} color="var(--accent-primary-light)" />
-          <select
-            className="role-select"
-            value={selectedPeriod.label}
-            onChange={e => {
-              const p = periods.find(item => item.label === e.target.value);
-              if (p) setSelectedPeriod(p);
-            }}
-          >
-            {periods.map(p => (
-              <option key={p.label} value={p.label}>
-                {p.label}
-              </option>
-            ))}
-          </select>
+        <div className="header-search">
+          <Search size={15} color="var(--text-dim)" />
+          <input
+            type="text"
+            placeholder="Search for projects, tickets, people..."
+            value={searchVal}
+            onChange={e => setSearchVal(e.target.value)}
+          />
         </div>
 
-        {/* Delta Sync Button (Criteria 8) */}
-        <button
-          className="btn btn-secondary btn-sm"
-          onClick={handleSyncNow}
-          disabled={isSyncing}
-          title="Incremental delta sync across JIRA, Azure DevOps, Git, TestRail, SharePoint"
-        >
-          <RefreshCw size={14} className={isSyncing ? 'spin-animation' : ''} />
-          <span>{isSyncing ? 'Syncing...' : 'Incremental Sync'}</span>
-        </button>
-
+        {/* Sync feedback */}
         {syncFeedback && (
-          <span className="pill-badge green" style={{ animation: 'fadeIn 0.2s ease' }}>
-            <Check size={12} /> {syncFeedback}
+          <span className="pill-badge green fade-in">
+            <Check size={11} /> {syncFeedback}
           </span>
         )}
       </div>
 
+      {/* Right controls */}
       <div className="header-right">
-        {/* RBAC Role Switcher (Criteria 10) */}
-        <div className="role-switcher-card">
-          <Shield size={16} color="var(--accent-cyan)" />
-          <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Role:</span>
+        {/* Role switcher — kept for demo */}
+        <div className="role-switcher-card" style={{ gap: '6px' }}>
           <select
             className="role-select"
             value={userRole}
             onChange={e => handleRoleChange(e.target.value as UserRole)}
+            style={{ fontSize: '0.8rem' }}
           >
-            <option value="Engineer">Engineer (Self View)</option>
-            <option value="Lead">Lead (Team & Project)</option>
-            <option value="Delivery Head">Delivery Head (Organization)</option>
-            <option value="Admin">Admin (Full Control)</option>
+            <option value="Engineer">Engineer</option>
+            <option value="Lead">Lead</option>
+            <option value="Delivery Head">Delivery Head</option>
+            <option value="Admin">Admin</option>
           </select>
         </div>
 
-        {/* Criteria Guide Walkthrough Button */}
-        <button
-          className="btn btn-secondary btn-sm"
-          onClick={() => setShowGuide(true)}
-          style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
-        >
-          <Sparkles size={14} color="var(--accent-cyan)" />
-          <span>11-Criteria Tour</span>
+        {/* Sync button */}
+        <button className="btn btn-secondary btn-sm" onClick={handleSync} disabled={isSyncing}>
+          <RefreshCw size={13} className={isSyncing ? 'spin-animation' : ''} />
         </button>
 
-        {/* User Profile Pill */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          {activeAssociate && (
-            <>
-              <img
-                src={activeAssociate.avatar}
-                alt={activeAssociate.name}
-                className="role-avatar"
-              />
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#fff' }}>
-                  {activeAssociate.name}
-                </span>
-                <span style={{ fontSize: '0.7rem', color: 'var(--text-dim)' }}>
-                  {activeAssociate.title}
-                </span>
-              </div>
-            </>
-          )}
+        {/* Date range */}
+        <div className="header-date-btn">
+          <Calendar size={14} color="var(--text-muted)" />
+          <select
+            style={{ background: 'transparent', border: 'none', outline: 'none',
+              fontSize: '0.84rem', fontWeight: 500, color: 'var(--text-primary)', cursor: 'pointer' }}
+            value={selectedPeriod.label}
+            onChange={e => {
+              const p = periods.find(x => x.label === e.target.value);
+              if (p) setSelectedPeriod(p);
+            }}
+          >
+            {periods.map(p => (
+              <option key={p.label} value={p.label}>{p.label}</option>
+            ))}
+          </select>
+          <ChevronDown size={13} color="var(--text-muted)" />
+        </div>
+
+        {/* Notification bell */}
+        <div className="header-icon-btn">
+          <Bell size={16} />
+          <span className="header-notif-dot" />
+        </div>
+
+        {/* User */}
+        <div className="header-user">
+          <div className="header-avatar">{initials}</div>
+          <div>
+            <div className="header-user-name">{activeAssociate?.name ?? 'Nithin Reddy'}</div>
+            <div className="header-user-role">{activeAssociate?.title ?? userRole}</div>
+          </div>
         </div>
       </div>
-
-      {showGuide && <CriteriaGuideModal onClose={() => setShowGuide(false)} />}
     </header>
   );
 };

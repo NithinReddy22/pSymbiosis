@@ -103,7 +103,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [currentUserId, setCurrentUserId] = useState<string>('A006'); // Sarah Jenkins (VP Delivery)
 
   // Navigation & Filters
-  const [activeTab, setActiveTab] = useState<string>('overview');
+  const [activeTab, setActiveTab] = useState<string>('home');
   const [selectedPeriod, setSelectedPeriod] = useState<DatePeriod>({
     start: '2026-01-01',
     end: '2026-03-31',
