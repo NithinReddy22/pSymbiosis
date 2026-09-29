@@ -8,6 +8,11 @@ export default defineConfig({
     port: 5173,
     host: true,
     proxy: {
+      '/api/dashboard': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        secure: false,
+      },
       // Forward /api/jira/* to your backend server.
       // Update the target URL to match wherever your backend is running.
       '/api/jira': {
