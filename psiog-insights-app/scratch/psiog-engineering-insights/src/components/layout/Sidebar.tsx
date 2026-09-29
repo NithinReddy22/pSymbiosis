@@ -3,7 +3,7 @@ import { useApp } from '../../context/AppContext';
 import {
   Home, User, FolderKanban, BarChart2, Sparkles,
   Database, Building2, ShieldCheck, Settings,
-  HelpCircle, Sliders, Tag, TrendingUp, LucideIcon,
+  HelpCircle, Sliders, Tag, TrendingUp, LogOut, LucideIcon,
 } from 'lucide-react';
 import { findUnmatchedActivities } from '../../services/identityResolution';
 
@@ -13,7 +13,7 @@ const PsiogWordmark: React.FC = () => (
   </span>
 );
 
-export const Sidebar: React.FC = () => {
+export const Sidebar: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
   const {
     activeTab, setActiveTab, userRole,
     identities, tickets, prs, reviews, tests, docs, allReports,
@@ -95,7 +95,7 @@ export const Sidebar: React.FC = () => {
         {/* Spacer */}
         <div style={{ flex: 1 }} />
 
-        {/* Help at bottom */}
+        {/* Help & Logout at bottom */}
         <div className="sidebar-footer" style={{ marginTop: '8px' }}>
           <button
             className="nav-item"
@@ -104,6 +104,14 @@ export const Sidebar: React.FC = () => {
           >
             <HelpCircle size={17} />
             <span>Help &amp; Support</span>
+          </button>
+          <button
+            className="nav-item"
+            style={{ color: 'var(--text-dim)' }}
+            onClick={onLogout}
+          >
+            <LogOut size={17} />
+            <span>Logout</span>
           </button>
         </div>
       </nav>

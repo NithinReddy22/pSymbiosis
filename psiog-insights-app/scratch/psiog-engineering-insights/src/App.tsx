@@ -15,7 +15,7 @@ import { JiraSummaryView } from './components/views/JiraSummaryView';
 import { ServiceDeliveryView } from './components/views/ServiceDeliveryView';
 import { LoginPage } from './components/auth/LoginPage';
 
-const MainLayout: React.FC = () => {
+const MainLayout: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
   const { activeTab, setActiveTab, userRole } = useApp();
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const MainLayout: React.FC = () => {
 
   return (
     <div className="app-container">
-      <Sidebar />
+      <Sidebar onLogout={onLogout} />
       <div className="main-area">
         <Header />
         <main>
@@ -60,7 +60,7 @@ export const App: React.FC = () => {
 
   return (
     <AppProvider>
-      <MainLayout />
+      <MainLayout onLogout={() => setIsAuthenticated(false)} />
     </AppProvider>
   );
 };

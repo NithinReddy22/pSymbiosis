@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Shield } from 'lucide-react';
+import { Mail, Lock, Shield } from 'lucide-react';
 
 interface LoginPageProps {
   onLogin: () => void;
@@ -123,6 +123,7 @@ const MicrosoftLogo: React.FC = () => (
 
 export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSignIn = (e: React.FormEvent) => {
@@ -175,6 +176,18 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               autoComplete="email"
+            />
+          </div>
+          <label className="lp-label" style={{ marginTop: '12px' }}>Password</label>
+          <div className="lp-input-wrap">
+            <Lock size={16} color="#9ca3af" />
+            <input
+              type="password"
+              className="lp-input"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
             />
           </div>
           <button type="submit" className="lp-btn-signin" disabled={isLoading}>
