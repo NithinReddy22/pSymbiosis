@@ -1,0 +1,18 @@
+
+> psiog-engineering-insights@1.0.0 dev
+> vite
+
+
+  VITE v5.4.21  ready in 1742 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://192.168.11.117:5173/
+11:31:27 am [vite] hmr update /src/components/views/AssociateView.tsx
+11:31:37 am [vite] hmr update /src/components/views/AssociateView.tsx
+11:32:06 am [vite] hmr update /src/components/views/AssociateView.tsx
+11:32:11 am [vite] hmr update /src/components/views/AssociateView.tsx
+11:32:36 am [vite] hmr update /src/components/views/AssociateView.tsx
+11:32:51 am [vite] hmr update /src/components/views/ProjectView.tsx
+11:32:56 am [vite] hmr update /src/components/views/ProjectView.tsx
+11:45:46 am [vite] hmr update /src/components/layout/Header.tsx
+11:45:53 am [vite] hmr update /src/components/layout/Header.tsx

@@ -1,0 +1,13 @@
+
+> psiog-engineering-insights@1.0.0 build
+> tsc && vite build
+
+vite v5.4.21 building for production...
+transforming...
+✓ 1603 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   1.25 kB │ gzip:  0.68 kB
+dist/assets/index-zctJhxJd.css    9.98 kB │ gzip:  2.79 kB
+dist/assets/index-h88BBMh_.js   332.32 kB │ gzip: 90.81 kB
+✓ built in 7.45s
