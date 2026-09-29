@@ -154,7 +154,7 @@ export const JiraSummaryView: React.FC = () => {
       {data && (
         <>
           {/* User + Project identity */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 24 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: 20, marginBottom: 24 }}>
             {/* User card */}
             <div className="glass-card" style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
               <div style={{ width: 52, height: 52, borderRadius: 12,
