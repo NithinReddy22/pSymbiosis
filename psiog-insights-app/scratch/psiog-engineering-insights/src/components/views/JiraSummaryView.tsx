@@ -98,7 +98,7 @@ export const JiraSummaryView: React.FC = () => {
       {/* Search form */}
       <div className="glass-card" style={{ marginBottom: 24 }}>
         <form onSubmit={handleSubmit}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 160px 160px 160px auto', gap: 12, alignItems: 'flex-end' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) 160px 160px 160px auto', gap: 12, alignItems: 'flex-end' }}>
             <div>
               <label className="form-label">Team member name</label>
               <div className="header-search" style={{ borderRadius: 10, maxWidth: '100%', background: 'var(--bg-input)', border: '1px solid var(--border-color)' }}>

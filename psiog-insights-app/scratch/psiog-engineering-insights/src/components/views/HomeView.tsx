@@ -178,7 +178,7 @@ export const HomeView: React.FC = () => {
       </div>
 
       {/* Middle row: chart + score breakdown */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 20, marginBottom: 24 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) 340px', gap: 20, marginBottom: 24 }}>
         {/* Performance Trend */}
         <div className="glass-card">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
@@ -218,7 +218,7 @@ export const HomeView: React.FC = () => {
       </div>
 
       {/* Bottom row: projects + recent activity */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 20, marginBottom: 24 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) 340px', gap: 20, marginBottom: 24 }}>
         {/* Current Projects */}
         <div className="glass-card">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
@@ -312,7 +312,7 @@ export const HomeView: React.FC = () => {
       </div>
 
       {/* Bottom row: AI summary + strengths + improvements */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr', gap: 20 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1.2fr) minmax(0,1fr) minmax(0,1fr)', gap: 20 }}>
         {/* AI Summary */}
         <div className="glass-card ai-insight-card">
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
