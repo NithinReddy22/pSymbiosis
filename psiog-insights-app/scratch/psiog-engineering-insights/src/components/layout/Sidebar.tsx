@@ -3,7 +3,7 @@ import { useApp } from '../../context/AppContext';
 import {
   Home, User, FolderKanban, BarChart2, Sparkles,
   Database, Building2, ShieldCheck, Settings,
-  HelpCircle, Sliders, Tag, TrendingUp, LogOut, LucideIcon,
+  HelpCircle, LayoutDashboard, Sliders, Tag, TrendingUp, LogOut, LucideIcon,
 } from 'lucide-react';
 import { findUnmatchedActivities } from '../../services/identityResolution';
 
@@ -37,6 +37,7 @@ export const Sidebar: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
 
   const mainNav: NavItem[] = [
     { id: 'home',      label: 'Home',           icon: Home,        show: true },
+    { id: 'dashboard', label: 'Dashboard',       icon: LayoutDashboard, show: true },
     { id: 'associate', label: 'My Performance',  icon: User,        show: true },
     { id: 'project',   label: 'Projects',        icon: FolderKanban, show: isLead },
     { id: 'overview',  label: 'Reports',         icon: BarChart2,   show: isHead },

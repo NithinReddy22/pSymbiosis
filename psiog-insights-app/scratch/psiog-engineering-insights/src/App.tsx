@@ -13,6 +13,7 @@ import { ModelBuilderView } from './components/views/ModelBuilderView';
 import { AIInsightsView } from './components/views/AIInsightsView';
 import { JiraSummaryView } from './components/views/JiraSummaryView';
 import { ServiceDeliveryView } from './components/views/ServiceDeliveryView';
+import { DashboardView } from './components/views/DashboardView';
 import { LoginPage } from './components/auth/LoginPage';
 
 const MainLayout: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
@@ -20,10 +21,10 @@ const MainLayout: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
 
   useEffect(() => {
     if (userRole === 'Engineer') {
-      const allowed = ['home', 'associate', 'manual-data', 'ai-insights', 'jira'];
+      const allowed = ['home', 'dashboard', 'associate', 'manual-data', 'ai-insights', 'jira'];
       if (!allowed.includes(activeTab)) setActiveTab('home');
     } else if (userRole === 'Lead') {
-      const allowed = ['home', 'project', 'associate', 'identity', 'manual-data', 'ai-insights', 'jira', 'delivery'];
+      const allowed = ['home', 'dashboard', 'project', 'associate', 'identity', 'manual-data', 'ai-insights', 'jira', 'delivery'];
       if (!allowed.includes(activeTab)) setActiveTab('home');
     }
   }, [userRole, activeTab, setActiveTab]);
@@ -35,6 +36,7 @@ const MainLayout: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
         <Header />
         <main>
           {activeTab === 'home'        && <HomeView />}
+          {activeTab === 'dashboard'   && <DashboardView />}
           {activeTab === 'overview'    && <ExecutiveOverview />}
           {activeTab === 'project'     && <ProjectView />}
           {activeTab === 'associate'   && <AssociateView />}
