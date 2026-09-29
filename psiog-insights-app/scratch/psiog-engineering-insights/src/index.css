@@ -627,6 +627,10 @@ body {
 .stat-icon.cyan { background: rgba(75,158,248,0.12); color: #4B9EF8; }
 .stat-icon.amber { background: rgba(245,158,11,0.12); color: #f59e0b; }
 .stat-icon.rose { background: rgba(244,63,94,0.12); color: #f43f5e; }
+.stat-icon.purple { background: rgba(139,92,246,0.12); color: #8b5cf6; }
+
+/* selected connector border */
+.selected-border { border-color: var(--brand-teal) !important; }
 .stat-value {
   font-size: 1.75rem; font-weight: 700; line-height: 1.1;
   font-family: 'Outfit', sans-serif; color: var(--text-primary);
@@ -854,6 +858,81 @@ body {
 .connector-status-dot.green { background: #10b981; }
 .connector-status-dot.amber { background: #f59e0b; }
 .connector-status-dot.gray { background: #d1d5db; }
+
+/* ── Two and three column grids ── */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 900px) { .grid-3 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 580px) { .grid-3 { grid-template-columns: 1fr; } }
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+@media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
+
+/* ── Progress bar (dimension score bars) ── */
+.progress-bar-container {
+  height: 8px;
+  background: #e8edf2;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+/* ── psiog-table — full-width data table with light styling ── */
+.psiog-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.psiog-table th {
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+  background: var(--bg-page);
+}
+.psiog-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+.psiog-table tbody tr:hover { background: #f9fafb; }
+.psiog-table tbody tr:last-child td { border-bottom: none; }
+
+/* ── table-container — horizontal scroll wrapper ── */
+.table-container { overflow-x: auto; }
+
+/* ── modal-content — alias for modal-box (some modals use this class) ── */
+.modal-content {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 780px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── select & option — ensure dropdown text is always readable ── */
+select { color: var(--text-primary); background: var(--bg-card); }
+select option { color: var(--text-primary); background: #ffffff; }
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 5px; height: 5px; }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { CalculatedPerformanceReport, Associate } from '../../types';
 import { ScoreBadge } from './ScoreBadge';
-import { X, CheckCircle, AlertTriangle, ShieldCheck, Scale, Info, Sparkles } from 'lucide-react';
+import { X, CheckCircle, AlertTriangle, ShieldCheck, Scale, Info, Sparkles, Rocket, Gem, Search, BookOpen, Shield } from 'lucide-react';
 
 interface ExplainModalProps {
   report: CalculatedPerformanceReport;
@@ -13,11 +13,11 @@ export const ExplainModal: React.FC<ExplainModalProps> = ({ report, associate, o
   const { dimensions, contextAdjustments, sparseDataWarning, tenureSegments, overallScore } = report;
 
   const dimensionList = [
-    { key: 'delivery', name: 'Velocity & Delivery', detail: dimensions.delivery, icon: '🚀' },
-    { key: 'quality', name: 'Code Quality & Stability', detail: dimensions.quality, icon: '💎' },
-    { key: 'review', name: 'Code Review & Rigor', detail: dimensions.review, icon: '🔍' },
-    { key: 'documentation', name: 'Architecture & Documentation', detail: dimensions.documentation, icon: '📚' },
-    { key: 'reliability', name: 'Operational Reliability', detail: dimensions.reliability, icon: '🛡️' }
+    { key: 'delivery', name: 'Velocity & Delivery', detail: dimensions.delivery, Icon: Rocket, color: '#2DC4C2' },
+    { key: 'quality', name: 'Code Quality & Stability', detail: dimensions.quality, Icon: Gem, color: '#4B9EF8' },
+    { key: 'review', name: 'Code Review & Rigor', detail: dimensions.review, Icon: Search, color: '#9b87f5' },
+    { key: 'documentation', name: 'Architecture & Documentation', detail: dimensions.documentation, Icon: BookOpen, color: '#C5D000' },
+    { key: 'reliability', name: 'Operational Reliability', detail: dimensions.reliability, Icon: Shield, color: '#f59e0b' }
   ];
 
   return (
@@ -55,7 +55,7 @@ export const ExplainModal: React.FC<ExplainModalProps> = ({ report, associate, o
               <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--accent-primary-light)', fontWeight: 600 }}>
                 Composite Weighted Score
               </span>
-              <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#fff', marginTop: '2px' }}>
+              <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '2px' }}>
                 {overallScore}/100 <span style={{ fontSize: '0.9rem', fontWeight: 500, color: 'var(--text-muted)' }}>({report.ratingBand})</span>
               </div>
               <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '4px' }}>
@@ -78,7 +78,7 @@ export const ExplainModal: React.FC<ExplainModalProps> = ({ report, associate, o
             }}>
               <ShieldCheck size={20} color="var(--accent-emerald)" style={{ flexShrink: 0, marginTop: '2px' }} />
               <div>
-                <div style={{ fontWeight: 600, fontSize: '0.86rem', color: '#fff' }}>
+                <div style={{ fontWeight: 600, fontSize: '0.86rem', color: 'var(--text-primary)' }}>
                   Fairness Context Adjustments Applied ({contextAdjustments.notesApplied.length} manager notes)
                 </div>
                 <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '4px' }}>
@@ -101,7 +101,7 @@ export const ExplainModal: React.FC<ExplainModalProps> = ({ report, associate, o
               alignItems: 'center'
             }}>
               <AlertTriangle size={18} color="var(--accent-amber)" />
-              <div style={{ fontSize: '0.82rem', color: '#fef3c7' }}>
+              <div style={{ fontSize: '0.82rem', color: '#92400e' }}>
                 <strong>Sparse Data Notice:</strong> {sparseDataWarning.reason} (Margin of error {sparseDataWarning.confidenceInterval}).
               </div>
             </div>
@@ -119,15 +119,15 @@ export const ExplainModal: React.FC<ExplainModalProps> = ({ report, associate, o
 
               return (
                 <div key={dim.key} style={{
-                  background: 'rgba(255, 255, 255, 0.03)',
+                  background: 'var(--bg-input)',
                   border: '1px solid var(--border-color)',
                   borderRadius: 'var(--radius-md)',
                   padding: '14px 18px'
                 }}>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <span style={{ fontSize: '1.1rem' }}>{dim.icon}</span>
-                      <span style={{ fontWeight: 600, fontSize: '0.95rem', color: '#fff' }}>{dim.name}</span>
+                      <dim.Icon size={16} color={dim.color} />
+                      <span style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--text-primary)' }}>{dim.name}</span>
                       <span className="pill-badge blue" style={{ fontSize: '0.7rem', padding: '2px 8px' }}>
                         Weight: {weightPercent}%
                       </span>
@@ -148,14 +148,14 @@ export const ExplainModal: React.FC<ExplainModalProps> = ({ report, associate, o
                     display: 'grid',
                     gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
                     gap: '10px',
-                    background: 'rgba(0, 0, 0, 0.25)',
+                    background: 'var(--bg-input)',
                     padding: '10px 14px',
                     borderRadius: 'var(--radius-sm)',
                     fontSize: '0.78rem'
                   }}>
                     <div>
                       <span style={{ color: 'var(--text-dim)', textTransform: 'uppercase' }}>Target Benchmark:</span>
-                      <div style={{ color: '#fff', fontWeight: 500 }}>{dim.detail.benchmarkTarget}</div>
+                      <div style={{ color: 'var(--text-primary)', fontWeight: 500 }}>{dim.detail.benchmarkTarget}</div>
                     </div>
                     <div>
                       <span style={{ color: 'var(--text-dim)', textTransform: 'uppercase' }}>Raw Activity Metrics:</span>
@@ -177,7 +177,7 @@ export const ExplainModal: React.FC<ExplainModalProps> = ({ report, associate, o
               borderRadius: 'var(--radius-md)',
               padding: '12px 16px'
             }}>
-              <div style={{ fontWeight: 600, fontSize: '0.84rem', color: '#fff', marginBottom: '6px' }}>
+              <div style={{ fontWeight: 600, fontSize: '0.84rem', color: 'var(--text-primary)', marginBottom: '6px' }}>
                 Time-Bound Role Attribution Across Period:
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '0.8rem', color: 'var(--text-muted)' }}>

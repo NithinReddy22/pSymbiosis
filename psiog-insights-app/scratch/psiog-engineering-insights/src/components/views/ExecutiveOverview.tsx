@@ -131,7 +131,7 @@ export const ExecutiveOverview: React.FC = () => {
       </div>
 
       {/* Offerings Grid */}
-      <h2 style={{ fontSize: '1.15rem', color: '#fff', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <h2 style={{ fontSize: '1.15rem', color: 'var(--text-primary)', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
         <Layers size={18} color="var(--accent-primary-light)" />
         Performance Benchmarks by Practice Offering
       </h2>
@@ -140,7 +140,7 @@ export const ExecutiveOverview: React.FC = () => {
           <div key={stat.offering} className="glass-card">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
               <div>
-                <h3 style={{ fontSize: '1.05rem', color: '#fff' }}>{stat.offering}</h3>
+                <h3 style={{ fontSize: '1.05rem', color: 'var(--text-primary)' }}>{stat.offering}</h3>
                 <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
                   {stat.projectsCount} Projects • {stat.associatesCount} Active Engineers
                 </span>
@@ -170,7 +170,7 @@ export const ExecutiveOverview: React.FC = () => {
       <div className="glass-card">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>
           <div>
-            <h3 style={{ fontSize: '1.1rem', color: '#fff' }}>Project Portfolios & Health</h3>
+            <h3 style={{ fontSize: '1.1rem', color: 'var(--text-primary)' }}>Project Portfolios & Health</h3>
             <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
               Multi-platform tool health and team performance scores
             </p>
@@ -197,7 +197,7 @@ export const ExecutiveOverview: React.FC = () => {
                 return (
                   <tr key={proj.id}>
                     <td>
-                      <div style={{ fontWeight: 600, color: '#fff' }}>{proj.name}</div>
+                      <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{proj.name}</div>
                       <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>
                         Client: {proj.client} • Code: {proj.code}
                       </div>
@@ -223,7 +223,7 @@ export const ExecutiveOverview: React.FC = () => {
                           <span key={t} style={{
                             fontSize: '0.7rem',
                             padding: '2px 6px',
-                            background: 'rgba(255, 255, 255, 0.05)',
+                            background: 'var(--bg-input)',
                             borderRadius: '4px',
                             border: '1px solid var(--border-color)'
                           }}>

@@ -85,7 +85,7 @@ export const ModelBuilderView: React.FC = () => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <History size={20} color="var(--accent-primary-light)" />
           <div>
-            <div style={{ fontWeight: 600, color: '#fff', fontSize: '0.9rem' }}>
+            <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.9rem' }}>
               Model Immutability & Version Snapshots
             </div>
             <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
@@ -112,7 +112,7 @@ export const ModelBuilderView: React.FC = () => {
         {/* Dimension Weights Calibrator */}
         <div className="glass-card">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-            <h3 style={{ fontSize: '1.05rem', color: '#fff' }}>Calibrate Dimension Weights</h3>
+            <h3 style={{ fontSize: '1.05rem', color: 'var(--text-primary)' }}>Calibrate Dimension Weights</h3>
             <span className={`pill-badge ${totalWeightPercent === 100 ? 'green' : 'amber'}`}>
               Sum: {totalWeightPercent}% / 100%
             </span>
@@ -134,7 +134,7 @@ export const ModelBuilderView: React.FC = () => {
             {/* Delivery Slider */}
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.84rem', marginBottom: '4px' }}>
-                <span style={{ fontWeight: 500, color: '#fff' }}>Velocity & Delivery Throughput</span>
+                <span style={{ fontWeight: 500, color: 'var(--text-primary)' }}>Velocity & Delivery Throughput</span>
                 <span style={{ fontWeight: 700, color: 'var(--accent-primary-light)' }}>
                   {Math.round(weights.delivery * 100)}%
                 </span>
@@ -153,7 +153,7 @@ export const ModelBuilderView: React.FC = () => {
             {/* Quality Slider */}
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.84rem', marginBottom: '4px' }}>
-                <span style={{ fontWeight: 500, color: '#fff' }}>Code Quality & Low Rework</span>
+                <span style={{ fontWeight: 500, color: 'var(--text-primary)' }}>Code Quality & Low Rework</span>
                 <span style={{ fontWeight: 700, color: 'var(--accent-emerald)' }}>
                   {Math.round(weights.quality * 100)}%
                 </span>
@@ -172,7 +172,7 @@ export const ModelBuilderView: React.FC = () => {
             {/* Review Slider */}
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.84rem', marginBottom: '4px' }}>
-                <span style={{ fontWeight: 500, color: '#fff' }}>Peer Code Review Rigor</span>
+                <span style={{ fontWeight: 500, color: 'var(--text-primary)' }}>Peer Code Review Rigor</span>
                 <span style={{ fontWeight: 700, color: 'var(--accent-cyan)' }}>
                   {Math.round(weights.review * 100)}%
                 </span>
@@ -191,7 +191,7 @@ export const ModelBuilderView: React.FC = () => {
             {/* Documentation Slider */}
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.84rem', marginBottom: '4px' }}>
-                <span style={{ fontWeight: 500, color: '#fff' }}>Architecture & Documentation</span>
+                <span style={{ fontWeight: 500, color: 'var(--text-primary)' }}>Architecture & Documentation</span>
                 <span style={{ fontWeight: 700, color: 'var(--accent-purple)' }}>
                   {Math.round(weights.documentation * 100)}%
                 </span>
@@ -210,7 +210,7 @@ export const ModelBuilderView: React.FC = () => {
             {/* Reliability Slider */}
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.84rem', marginBottom: '4px' }}>
-                <span style={{ fontWeight: 500, color: '#fff' }}>Operational Reliability</span>
+                <span style={{ fontWeight: 500, color: 'var(--text-primary)' }}>Operational Reliability</span>
                 <span style={{ fontWeight: 700, color: 'var(--accent-amber)' }}>
                   {Math.round(weights.reliability * 100)}%
                 </span>
@@ -242,11 +242,11 @@ export const ModelBuilderView: React.FC = () => {
         <div className="glass-card">
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
             <BookOpen size={18} color="var(--accent-cyan)" />
-            <h3 style={{ fontSize: '1.05rem', color: '#fff' }}>Documented Model Rationale</h3>
+            <h3 style={{ fontSize: '1.05rem', color: 'var(--text-primary)' }}>Documented Model Rationale</h3>
           </div>
 
           <div style={{
-            background: 'rgba(0, 0, 0, 0.25)',
+            background: 'var(--bg-input)',
             border: '1px solid var(--border-color)',
             borderRadius: 'var(--radius-md)',
             padding: '16px',
@@ -280,7 +280,7 @@ export const ModelBuilderView: React.FC = () => {
       <div className="glass-card">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
           <div>
-            <h3 style={{ fontSize: '1.05rem', color: '#fff' }}>Practice Offering Target Benchmarks</h3>
+            <h3 style={{ fontSize: '1.05rem', color: 'var(--text-primary)' }}>Practice Offering Target Benchmarks</h3>
             <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
               Domain-specific monthly targets per persona to reflect varying deliverable types
             </p>
@@ -301,9 +301,9 @@ export const ModelBuilderView: React.FC = () => {
 
         {currentBenchmark && (
           <div className="grid-3">
-            <div style={{ background: 'rgba(255, 255, 255, 0.03)', padding: '14px', borderRadius: 'var(--radius-md)' }}>
+            <div style={{ background: 'var(--bg-input)', padding: '14px', borderRadius: 'var(--radius-md)' }}>
               <span style={{ fontSize: '0.72rem', color: 'var(--text-dim)', textTransform: 'uppercase' }}>Delivery Velocity:</span>
-              <div style={{ fontSize: '1.2rem', fontWeight: 700, color: '#fff', marginTop: '2px' }}>
+              <div style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)', marginTop: '2px' }}>
                 {currentBenchmark.expectedStoryPointsPerMonth} Story Pts / mo
               </div>
               <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)' }}>
@@ -311,9 +311,9 @@ export const ModelBuilderView: React.FC = () => {
               </div>
             </div>
 
-            <div style={{ background: 'rgba(255, 255, 255, 0.03)', padding: '14px', borderRadius: 'var(--radius-md)' }}>
+            <div style={{ background: 'var(--bg-input)', padding: '14px', borderRadius: 'var(--radius-md)' }}>
               <span style={{ fontSize: '0.72rem', color: 'var(--text-dim)', textTransform: 'uppercase' }}>Review Rigor & Quality:</span>
-              <div style={{ fontSize: '1.2rem', fontWeight: 700, color: '#fff', marginTop: '2px' }}>
+              <div style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)', marginTop: '2px' }}>
                 {currentBenchmark.expectedReviewsPerPR} Reviews per PR
               </div>
               <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)' }}>
@@ -321,9 +321,9 @@ export const ModelBuilderView: React.FC = () => {
               </div>
             </div>
 
-            <div style={{ background: 'rgba(255, 255, 255, 0.03)', padding: '14px', borderRadius: 'var(--radius-md)' }}>
+            <div style={{ background: 'var(--bg-input)', padding: '14px', borderRadius: 'var(--radius-md)' }}>
               <span style={{ fontSize: '0.72rem', color: 'var(--text-dim)', textTransform: 'uppercase' }}>Architecture & Documentation:</span>
-              <div style={{ fontSize: '1.2rem', fontWeight: 700, color: '#fff', marginTop: '2px' }}>
+              <div style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)', marginTop: '2px' }}>
                 {currentBenchmark.expectedDocsPerQuarter} Tech Docs / quarter
               </div>
               <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)' }}>

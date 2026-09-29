@@ -155,7 +155,7 @@ export const ConnectorsView: React.FC = () => {
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
                 <div>
-                  <h3 style={{ fontSize: '1rem', color: '#fff' }}>{conn.name}</h3>
+                  <h3 style={{ fontSize: '1rem', color: 'var(--text-primary)' }}>{conn.name}</h3>
                   <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
                     Auth: {conn.authType}
                   </span>
@@ -193,7 +193,7 @@ export const ConnectorsView: React.FC = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <SlidersHorizontal size={18} color="var(--accent-primary-light)" />
-              <h3 style={{ fontSize: '1rem', color: '#fff' }}>
+              <h3 style={{ fontSize: '1rem', color: 'var(--text-primary)' }}>
                 Field Mappings Schema: {selectedConnector.tool}
               </h3>
             </div>
@@ -217,7 +217,7 @@ export const ConnectorsView: React.FC = () => {
               <div
                 key={sourceKey}
                 style={{
-                  background: 'rgba(0, 0, 0, 0.3)',
+                  background: 'var(--bg-input)',
                   border: '1px solid var(--border-color)',
                   borderRadius: 'var(--radius-sm)',
                   padding: '10px 14px',
@@ -247,7 +247,7 @@ export const ConnectorsView: React.FC = () => {
                       onChange={e => setEditingMappings({ ...editingMappings, [sourceKey]: e.target.value })}
                     />
                   ) : (
-                    <div style={{ fontWeight: 600, fontSize: '0.84rem', color: '#fff' }}>
+                    <div style={{ fontWeight: 600, fontSize: '0.84rem', color: 'var(--text-primary)' }}>
                       {targetField}
                     </div>
                   )}
@@ -261,7 +261,7 @@ export const ConnectorsView: React.FC = () => {
         <div className="glass-card">
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
             <UploadCloud size={18} color="var(--accent-cyan)" />
-            <h3 style={{ fontSize: '1rem', color: '#fff' }}>
+            <h3 style={{ fontSize: '1rem', color: 'var(--text-primary)' }}>
               Import Offline Tool Exports ({selectedConnector.tool})
             </h3>
           </div>
@@ -323,7 +323,7 @@ export const ConnectorsView: React.FC = () => {
       <div className="glass-card">
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
           <History size={18} color="var(--accent-emerald)" />
-          <h3 style={{ fontSize: '1rem', color: '#fff' }}>
+          <h3 style={{ fontSize: '1rem', color: 'var(--text-primary)' }}>
             Incremental Delta Sync Audit Log
           </h3>
         </div>

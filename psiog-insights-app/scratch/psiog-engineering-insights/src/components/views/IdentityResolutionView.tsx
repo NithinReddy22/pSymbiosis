@@ -82,7 +82,7 @@ export const IdentityResolutionView: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <AlertTriangle size={20} color="var(--accent-amber)" />
-              <h3 style={{ fontSize: '1rem', color: '#fff', fontWeight: 600 }}>
+              <h3 style={{ fontSize: '1rem', color: 'var(--text-primary)', fontWeight: 600 }}>
                 Unmatched Activity Triage Queue ({orphanActivities.length} orphan items detected)
               </h3>
             </div>
@@ -98,7 +98,7 @@ export const IdentityResolutionView: React.FC = () => {
               <div
                 key={item.id}
                 style={{
-                  background: 'rgba(0, 0, 0, 0.3)',
+                  background: 'var(--bg-input)',
                   border: '1px solid var(--border-color)',
                   borderRadius: 'var(--radius-sm)',
                   padding: '10px 14px',
@@ -111,7 +111,7 @@ export const IdentityResolutionView: React.FC = () => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <span className="pill-badge purple" style={{ fontSize: '0.72rem' }}>{item.sourceTool}</span>
                   <div>
-                    <div style={{ fontSize: '0.85rem', fontWeight: 500, color: '#fff' }}>{item.title}</div>
+                    <div style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-primary)' }}>{item.title}</div>
                     <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
                       Author Tool Identifier: <code>{item.sourceIdentifier}</code> • Project: {item.projectId}
                     </div>
@@ -121,7 +121,7 @@ export const IdentityResolutionView: React.FC = () => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <select
                     className="form-control"
-                    style={{ fontSize: '0.78rem', padding: '4px 8px', height: 'auto', background: '#1e293b' }}
+                    style={{ fontSize: '0.78rem', padding: '4px 8px', height: 'auto', background: 'var(--bg-input)' }}
                     value={targetAssociateId}
                     onChange={e => setTargetAssociateId(e.target.value)}
                   >
@@ -206,7 +206,7 @@ export const IdentityResolutionView: React.FC = () => {
                       </span>
                     </td>
                     <td>
-                      <div style={{ fontWeight: 600, color: '#fff', fontFamily: 'JetBrains Mono', fontSize: '0.85rem' }}>
+                      <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontFamily: 'JetBrains Mono', fontSize: '0.85rem' }}>
                         {id.accountHandle}
                       </div>
                       <div style={{ fontSize: '0.74rem', color: 'var(--text-dim)' }}>
@@ -218,14 +218,14 @@ export const IdentityResolutionView: React.FC = () => {
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <img src={matchedAssoc.avatar} alt={matchedAssoc.name} style={{ width: '26px', height: '26px', borderRadius: '50%' }} />
                           <div>
-                            <div style={{ fontWeight: 600, color: '#fff', fontSize: '0.85rem' }}>{matchedAssoc.name}</div>
+                            <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.85rem' }}>{matchedAssoc.name}</div>
                             <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>{matchedAssoc.email}</div>
                           </div>
                         </div>
                       ) : (
                         <div>
-                          <span style={{ color: 'var(--accent-amber)', fontSize: '0.8rem', fontWeight: 500 }}>
-                            ⚠️ Unassigned Orphan
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: 'var(--accent-amber)', fontSize: '0.8rem', fontWeight: 500 }}>
+                            <AlertTriangle size={14} /> Unassigned Orphan
                           </span>
                           {suggested && (
                             <div style={{ fontSize: '0.74rem', color: 'var(--accent-cyan)', marginTop: '2px' }}>
@@ -246,7 +246,7 @@ export const IdentityResolutionView: React.FC = () => {
                             }}
                           />
                         </div>
-                        <span style={{ fontSize: '0.78rem', fontWeight: 600, color: '#fff' }}>
+                        <span style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-primary)' }}>
                           {id.confidenceScore}%
                         </span>
                       </div>

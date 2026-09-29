@@ -92,7 +92,7 @@ export const AIInsightsView: React.FC = () => {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <ShieldAlert size={20} color="var(--accent-rose)" />
-            <h3 style={{ fontSize: '1.05rem', color: '#fff' }}>
+            <h3 style={{ fontSize: '1.05rem', color: 'var(--text-primary)' }}>
               Detected Anti-Gaming & Quality Anomalies ({allFlagsWithAssociate.length} Active Alerts)
             </h3>
           </div>
@@ -110,7 +110,7 @@ export const AIInsightsView: React.FC = () => {
             <div
               key={flag.id}
               style={{
-                background: 'rgba(0, 0, 0, 0.3)',
+                background: 'var(--bg-input)',
                 border: '1px solid var(--border-color)',
                 borderRadius: 'var(--radius-md)',
                 padding: '12px 16px',
@@ -125,7 +125,7 @@ export const AIInsightsView: React.FC = () => {
                   <span className={`pill-badge ${flag.severity === 'high' ? 'rose' : 'amber'}`} style={{ fontSize: '0.7rem' }}>
                     {flag.type} ({flag.severity.toUpperCase()})
                   </span>
-                  <span style={{ fontWeight: 600, color: '#fff', fontSize: '0.88rem' }}>
+                  <span style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.88rem' }}>
                     {flag.title}
                   </span>
                 </div>
@@ -156,7 +156,7 @@ export const AIInsightsView: React.FC = () => {
       <div className="glass-card">
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
           <Bot size={20} color="var(--accent-primary-light)" />
-          <h3 style={{ fontSize: '1.05rem', color: '#fff' }}>
+          <h3 style={{ fontSize: '1.05rem', color: 'var(--text-primary)' }}>
             Interactive AI Insights Sandbox
           </h3>
         </div>
@@ -180,7 +180,7 @@ export const AIInsightsView: React.FC = () => {
 
         {/* Conversation Stream */}
         <div style={{
-          background: 'rgba(0, 0, 0, 0.3)',
+          background: 'var(--bg-input)',
           border: '1px solid var(--border-color)',
           borderRadius: 'var(--radius-md)',
           padding: '16px',
@@ -211,9 +211,9 @@ export const AIInsightsView: React.FC = () => {
 
               <div
                 style={{
-                  background: msg.sender === 'user' ? 'var(--accent-primary-gradient)' : 'rgba(255, 255, 255, 0.05)',
+                  background: msg.sender === 'user' ? 'var(--accent-primary-gradient)' : 'var(--bg-card)',
                   border: msg.sender === 'user' ? 'none' : '1px solid var(--border-color)',
-                  color: '#fff',
+                  color: msg.sender === 'user' ? '#ffffff' : 'var(--text-primary)',
                   padding: '12px 16px',
                   borderRadius: 'var(--radius-md)',
                   fontSize: '0.84rem',
