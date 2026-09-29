@@ -89,7 +89,7 @@ export const ProjectView: React.FC = () => {
                   onChange={e => setSelectedProjectId(e.target.value)}
                 >
                   {projects.map(p => (
-                    <option key={p.id} value={p.id} style={{ background: '#111827' }}>
+                    <option key={p.id} value={p.id} style={{ background: '#ffffff', color: 'var(--text-primary)' }}>
                       {p.name} ({p.code})
                     </option>
                   ))}
@@ -129,7 +129,7 @@ export const ProjectView: React.FC = () => {
         </div>
         <div style={{ flex: 1 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <h4 style={{ fontSize: '0.95rem', color: '#fff', fontWeight: 600 }}>
+            <h4 style={{ fontSize: '0.95rem', color: 'var(--text-primary)', fontWeight: 600 }}>
               AI Project Delivery & Cadence Brief
             </h4>
             <ScoreBadge score={projectAISummary.healthScore} size="sm" showLabel />
@@ -204,7 +204,7 @@ export const ProjectView: React.FC = () => {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <TrendingUp size={18} color="var(--accent-primary-light)" />
-            <h3 style={{ fontSize: '1rem', color: '#fff' }}>
+            <h3 style={{ fontSize: '1rem', color: 'var(--text-primary)' }}>
               Bi-Weekly Sprint Velocity & Deliverable Throughput
             </h3>
           </div>
@@ -233,7 +233,7 @@ export const ProjectView: React.FC = () => {
               background: 'none',
               border: 'none',
               borderBottom: activeDrilldownTab === tab.id ? '2px solid var(--accent-primary-light)' : '2px solid transparent',
-              color: activeDrilldownTab === tab.id ? '#fff' : 'var(--text-muted)',
+              color: activeDrilldownTab === tab.id ? '#2DC4C2' : 'var(--text-muted)',
               fontWeight: activeDrilldownTab === tab.id ? 600 : 500,
               fontSize: '0.88rem',
               cursor: 'pointer'
@@ -267,7 +267,7 @@ export const ProjectView: React.FC = () => {
                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                         <img src={associate.avatar} alt={associate.name} style={{ width: '32px', height: '32px', borderRadius: '50%' }} />
                         <div>
-                          <div style={{ fontWeight: 600, color: '#fff' }}>{associate.name}</div>
+                          <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{associate.name}</div>
                           <div style={{ fontSize: '0.74rem', color: 'var(--text-dim)' }}>{associate.email}</div>
                         </div>
                       </div>
@@ -342,7 +342,7 @@ export const ProjectView: React.FC = () => {
                       <code style={{ color: 'var(--accent-primary-light)', fontWeight: 600 }}>{t.ticketKey}</code>
                     </td>
                     <td style={{ maxWidth: '350px' }}>
-                      <div style={{ fontWeight: 500, color: '#fff' }}>{t.title}</div>
+                      <div style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{t.title}</div>
                       <div style={{ fontSize: '0.74rem', color: 'var(--text-dim)' }}>Resolved: {new Date(t.resolvedAt).toLocaleDateString()}</div>
                     </td>
                     <td>
@@ -396,7 +396,7 @@ export const ProjectView: React.FC = () => {
                       <code style={{ color: 'var(--accent-cyan)' }}>#{pr.prNumber}</code>
                     </td>
                     <td style={{ maxWidth: '320px' }}>
-                      <div style={{ fontWeight: 500, color: '#fff' }}>{pr.title}</div>
+                      <div style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{pr.title}</div>
                       <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>{pr.repo}</div>
                     </td>
                     <td>
@@ -502,7 +502,7 @@ export const ProjectView: React.FC = () => {
                   <tr key={te.id}>
                     <td><code>{te.testCaseKey}</code></td>
                     <td>
-                      <div style={{ fontWeight: 500, color: '#fff' }}>{te.title}</div>
+                      <div style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{te.title}</div>
                       <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>{te.suiteName}</div>
                     </td>
                     <td><code>{te.testerToolId}</code></td>
@@ -543,7 +543,7 @@ export const ProjectView: React.FC = () => {
                     <td>
                       <span className="pill-badge purple">{d.docType}</span>
                     </td>
-                    <td style={{ fontWeight: 500, color: '#fff' }}>{d.title}</td>
+                    <td style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{d.title}</td>
                     <td><code>{d.authorToolId}</code></td>
                     <td>{d.wordCount.toLocaleString()} words</td>
                     <td>{d.viewsCount} views</td>

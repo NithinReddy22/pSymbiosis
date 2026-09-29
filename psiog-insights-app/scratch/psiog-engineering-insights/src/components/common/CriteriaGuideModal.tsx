@@ -166,7 +166,7 @@ export const CriteriaGuideModal: React.FC<CriteriaGuideModalProps> = ({ onClose 
             <div
               key={c.num}
               style={{
-                background: 'rgba(255, 255, 255, 0.03)',
+                background: 'var(--bg-input)',
                 border: '1px solid var(--border-color)',
                 borderRadius: 'var(--radius-md)',
                 padding: '12px 16px',
@@ -188,14 +188,14 @@ export const CriteriaGuideModal: React.FC<CriteriaGuideModalProps> = ({ onClose 
                     justifyContent: 'center',
                     fontSize: '0.8rem',
                     fontWeight: 700,
-                    color: '#fff',
+                    color: '#ffffff',
                     flexShrink: 0
                   }}
                 >
                   {c.num}
                 </div>
                 <div>
-                  <div style={{ fontWeight: 600, color: '#fff', fontSize: '0.9rem' }}>{c.title}</div>
+                  <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.9rem' }}>{c.title}</div>
                   <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '2px' }}>{c.desc}</div>
                 </div>
               </div>

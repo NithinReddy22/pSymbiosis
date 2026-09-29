@@ -115,7 +115,7 @@ export const HomeView: React.FC = () => {
       <div style={{ marginBottom: 24 }}>
         <h1 style={{ fontFamily: "'Outfit',sans-serif", fontSize: '1.75rem', fontWeight: 700,
           color: 'var(--text-primary)', letterSpacing: '-0.025em', marginBottom: 4 }}>
-          Welcome back, {firstName}! 👋
+          Welcome back, {firstName}
         </h1>
         <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
           Here's your performance overview for {/* period */}Oct – Dec 2026.
@@ -245,7 +245,7 @@ export const HomeView: React.FC = () => {
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <div style={{ width: 32, height: 32, borderRadius: 8, background: '#1e3a5f',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      color: '#fff', fontWeight: 700, fontSize: '0.85rem' }}>V</div>
+                      color: 'var(--text-primary)', fontWeight: 700, fontSize: '0.85rem' }}>V</div>
                     <div>
                       <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.875rem' }}>Velocidy</div>
                       <div style={{ fontSize: '0.74rem', color: 'var(--text-dim)' }}>B2B SaaS Platform</div>
@@ -267,7 +267,7 @@ export const HomeView: React.FC = () => {
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <div style={{ width: 32, height: 32, borderRadius: 8, background: '#1a4a3a',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      color: '#fff', fontWeight: 700, fontSize: '0.85rem' }}>S</div>
+                      color: 'var(--text-primary)', fontWeight: 700, fontSize: '0.85rem' }}>S</div>
                     <div>
                       <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.875rem' }}>Simplicity</div>
                       <div style={{ fontSize: '0.74rem', color: 'var(--text-dim)' }}>Legacy Platform</div>

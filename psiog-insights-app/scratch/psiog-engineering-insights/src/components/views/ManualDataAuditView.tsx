@@ -48,7 +48,7 @@ export const ManualDataAuditView: React.FC = () => {
           <ShieldCheck size={22} />
         </div>
         <div>
-          <h4 style={{ fontSize: '0.95rem', color: '#fff', fontWeight: 600 }}>
+          <h4 style={{ fontSize: '0.95rem', color: 'var(--text-primary)', fontWeight: 600 }}>
             Strict Non-Destructive Data Overlay Policy (Criteria 2)
           </h4>
           <p style={{ fontSize: '0.82rem', color: 'var(--text-main)', marginTop: '2px' }}>
@@ -61,7 +61,7 @@ export const ManualDataAuditView: React.FC = () => {
       <div className="glass-card">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
           <div>
-            <h3 style={{ fontSize: '1.05rem', color: '#fff' }}>Historical Audit Log ({manualEntries.length} Recorded Entries)</h3>
+            <h3 style={{ fontSize: '1.05rem', color: 'var(--text-primary)' }}>Historical Audit Log ({manualEntries.length} Recorded Entries)</h3>
             <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
               Track who entered manual data, for which project, and the documented business reason
             </p>
@@ -94,7 +94,7 @@ export const ManualDataAuditView: React.FC = () => {
                           <img src={assoc.avatar} alt={assoc.name} style={{ width: '26px', height: '26px', borderRadius: '50%' }} />
                         )}
                         <div>
-                          <div style={{ fontWeight: 600, color: '#fff', fontSize: '0.85rem' }}>{assoc?.name || entry.associateId}</div>
+                          <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.85rem' }}>{assoc?.name || entry.associateId}</div>
                           <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>{assoc?.title}</div>
                         </div>
                       </div>
@@ -105,7 +105,7 @@ export const ManualDataAuditView: React.FC = () => {
                       </span>
                     </td>
                     <td>
-                      <div style={{ fontWeight: 600, color: '#fff', fontSize: '0.85rem' }}>{entry.metricName}</div>
+                      <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.85rem' }}>{entry.metricName}</div>
                       <div style={{ fontSize: '0.74rem', color: 'var(--accent-primary-light)' }}>
                         Dimension: {entry.dimension}
                       </div>
@@ -119,7 +119,7 @@ export const ManualDataAuditView: React.FC = () => {
                       {entry.reason}
                     </td>
                     <td>
-                      <div style={{ fontSize: '0.82rem', fontWeight: 500, color: '#fff' }}>{entry.enteredBy}</div>
+                      <div style={{ fontSize: '0.82rem', fontWeight: 500, color: 'var(--text-primary)' }}>{entry.enteredBy}</div>
                       <span className="pill-badge purple" style={{ fontSize: '0.7rem' }}>Authorized</span>
                     </td>
                     <td>

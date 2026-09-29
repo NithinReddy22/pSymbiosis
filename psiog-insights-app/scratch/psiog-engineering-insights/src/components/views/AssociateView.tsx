@@ -94,18 +94,18 @@ export const AssociateView: React.FC = () => {
                 {userRole !== 'Engineer' ? (
                   <select
                     className="form-control"
-                    style={{ fontSize: '1.35rem', fontWeight: 700, padding: '4px 10px', height: 'auto', background: 'transparent', border: '1px solid var(--border-color)', color: '#fff' }}
+                    style={{ fontSize: '1.35rem', fontWeight: 700, padding: '4px 10px', height: 'auto', background: 'var(--bg-input)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
                     value={currentAssociate.id}
                     onChange={e => setSelectedAssociateId(e.target.value)}
                   >
                     {associates.map(a => (
-                      <option key={a.id} value={a.id} style={{ background: '#111827' }}>
+                      <option key={a.id} value={a.id} style={{ background: '#ffffff', color: 'var(--text-primary)' }}>
                         {a.name} ({a.title})
                       </option>
                     ))}
                   </select>
                 ) : (
-                  <h1 style={{ fontSize: '1.45rem', fontWeight: 700, color: '#fff' }}>
+                  <h1 style={{ fontSize: '1.45rem', fontWeight: 700, color: 'var(--text-primary)' }}>
                     {currentAssociate.name}
                   </h1>
                 )}
@@ -130,7 +130,7 @@ export const AssociateView: React.FC = () => {
               <div style={{ fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--text-dim)', fontWeight: 600 }}>
                 Performance Rating
               </div>
-              <div style={{ fontSize: '0.95rem', fontWeight: 600, color: '#fff', marginTop: '2px' }}>
+              <div style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '2px' }}>
                 {report.ratingBand}
               </div>
             </div>
@@ -162,7 +162,7 @@ export const AssociateView: React.FC = () => {
               <div
                 key={idx}
                 style={{
-                  background: 'rgba(255, 255, 255, 0.03)',
+                  background: 'var(--bg-input)',
                   border: '1px solid var(--border-color)',
                   borderRadius: 'var(--radius-md)',
                   padding: '12px 16px',
@@ -173,7 +173,7 @@ export const AssociateView: React.FC = () => {
               >
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ fontWeight: 600, color: '#fff', fontSize: '0.9rem' }}>{seg.projectName}</span>
+                    <span style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.9rem' }}>{seg.projectName}</span>
                     <span className="pill-badge purple" style={{ fontSize: '0.7rem' }}>{seg.role}</span>
                   </div>
                   <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)', marginTop: '4px' }}>
@@ -223,7 +223,7 @@ export const AssociateView: React.FC = () => {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
           <Sparkles size={18} color="var(--accent-primary-light)" />
-          <h3 style={{ fontSize: '1rem', color: '#fff', fontWeight: 600 }}>
+          <h3 style={{ fontSize: '1rem', color: 'var(--text-primary)', fontWeight: 600 }}>
             AI Plain-English Evaluation & Tenure Summary
           </h3>
         </div>
@@ -233,7 +233,7 @@ export const AssociateView: React.FC = () => {
 
         {aiInsights.tenureShiftNarrative && (
           <div style={{
-            background: 'rgba(0, 0, 0, 0.25)',
+            background: 'var(--bg-input)',
             borderRadius: 'var(--radius-sm)',
             padding: '10px 14px',
             marginTop: '12px',
@@ -286,7 +286,7 @@ export const AssociateView: React.FC = () => {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {antiGamingFlags.map(flag => (
-              <div key={flag.id} style={{ fontSize: '0.82rem', color: '#fff', background: 'rgba(0, 0, 0, 0.25)', padding: '10px 14px', borderRadius: 'var(--radius-sm)' }}>
+              <div key={flag.id} style={{ fontSize: '0.82rem', color: 'var(--text-primary)', background: 'var(--bg-input)', padding: '10px 14px', borderRadius: 'var(--radius-sm)' }}>
                 <div style={{ fontWeight: 600 }}>{flag.title}</div>
                 <div style={{ color: 'var(--text-muted)', marginTop: '2px' }}>{flag.description}</div>
                 <div style={{ fontSize: '0.74rem', color: 'var(--accent-primary-light)', fontFamily: 'JetBrains Mono', marginTop: '4px' }}>
@@ -299,7 +299,7 @@ export const AssociateView: React.FC = () => {
       )}
 
       {/* 5 Core Performance Dimensions */}
-      <h3 style={{ fontSize: '1.1rem', color: '#fff', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <h3 style={{ fontSize: '1.1rem', color: 'var(--text-primary)', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
         <Layers size={18} color="var(--accent-primary-light)" />
         Multi-Dimensional Score Breakdown & Radar Balance
       </h3>
@@ -307,7 +307,7 @@ export const AssociateView: React.FC = () => {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px', marginBottom: '32px' }}>
         {/* Radar Chart Card */}
         <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
-          <h4 style={{ fontSize: '0.92rem', color: '#fff', marginBottom: '8px', fontWeight: 600 }}>
+          <h4 style={{ fontSize: '0.92rem', color: 'var(--text-primary)', marginBottom: '8px', fontWeight: 600 }}>
             Dimensional Equilibrium vs Target Baseline
           </h4>
           <RadarChart
@@ -327,7 +327,7 @@ export const AssociateView: React.FC = () => {
           {/* Dimension 1: Delivery */}
           <div className="glass-card" style={{ padding: '16px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontWeight: 600, fontSize: '0.88rem', color: '#fff' }}>Velocity & Delivery</span>
+              <span style={{ fontWeight: 600, fontSize: '0.88rem', color: 'var(--text-primary)' }}>Velocity & Delivery</span>
               <ScoreBadge score={dimensions.delivery.score} size="sm" />
             </div>
             <div className="progress-bar-container" style={{ margin: '6px 0 10px' }}>
@@ -344,7 +344,7 @@ export const AssociateView: React.FC = () => {
           {/* Dimension 2: Quality */}
           <div className="glass-card" style={{ padding: '16px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontWeight: 600, fontSize: '0.88rem', color: '#fff' }}>Code Quality & Rework</span>
+              <span style={{ fontWeight: 600, fontSize: '0.88rem', color: 'var(--text-primary)' }}>Code Quality & Rework</span>
               <ScoreBadge score={dimensions.quality.score} size="sm" />
             </div>
             <div className="progress-bar-container" style={{ margin: '6px 0 10px' }}>
@@ -361,7 +361,7 @@ export const AssociateView: React.FC = () => {
           {/* Dimension 3: Review */}
           <div className="glass-card" style={{ padding: '16px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontWeight: 600, fontSize: '0.88rem', color: '#fff' }}>Peer Review Rigor</span>
+              <span style={{ fontWeight: 600, fontSize: '0.88rem', color: 'var(--text-primary)' }}>Peer Review Rigor</span>
               <ScoreBadge score={dimensions.review.score} size="sm" />
             </div>
             <div className="progress-bar-container" style={{ margin: '6px 0 10px' }}>
@@ -378,7 +378,7 @@ export const AssociateView: React.FC = () => {
           {/* Dimension 4: Documentation */}
           <div className="glass-card" style={{ padding: '16px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontWeight: 600, fontSize: '0.88rem', color: '#fff' }}>Architecture & Docs</span>
+              <span style={{ fontWeight: 600, fontSize: '0.88rem', color: 'var(--text-primary)' }}>Architecture & Docs</span>
               <ScoreBadge score={dimensions.documentation.score} size="sm" />
             </div>
             <div className="progress-bar-container" style={{ margin: '6px 0 10px' }}>
@@ -395,7 +395,7 @@ export const AssociateView: React.FC = () => {
           {/* Dimension 5: Reliability */}
           <div className="glass-card" style={{ padding: '16px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontWeight: 600, fontSize: '0.88rem', color: '#fff' }}>Operational Reliability</span>
+              <span style={{ fontWeight: 600, fontSize: '0.88rem', color: 'var(--text-primary)' }}>Operational Reliability</span>
               <ScoreBadge score={dimensions.reliability.score} size="sm" />
             </div>
             <div className="progress-bar-container" style={{ margin: '6px 0 10px' }}>
@@ -439,7 +439,7 @@ export const AssociateView: React.FC = () => {
               background: 'none',
               border: 'none',
               borderBottom: drilldownTab === tab.id ? '2px solid var(--accent-primary-light)' : '2px solid transparent',
-              color: drilldownTab === tab.id ? '#fff' : 'var(--text-muted)',
+              color: drilldownTab === tab.id ? '#2DC4C2' : 'var(--text-muted)',
               fontWeight: drilldownTab === tab.id ? 600 : 500,
               fontSize: '0.88rem',
               cursor: 'pointer'
@@ -470,7 +470,7 @@ export const AssociateView: React.FC = () => {
                 {userTickets.map(t => (
                   <tr key={t.id}>
                     <td><code>{t.ticketKey}</code></td>
-                    <td style={{ fontWeight: 500, color: '#fff' }}>{t.title}</td>
+                    <td style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{t.title}</td>
                     <td><span className="pill-badge blue">{t.projectId}</span></td>
                     <td><strong>{t.storyPoints} pts</strong></td>
                     <td>{t.cycleTimeHours}h</td>
@@ -502,7 +502,7 @@ export const AssociateView: React.FC = () => {
                 {userPRs.map(pr => (
                   <tr key={pr.id}>
                     <td><code>#{pr.prNumber}</code></td>
-                    <td style={{ fontWeight: 500, color: '#fff' }}>{pr.title}</td>
+                    <td style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{pr.title}</td>
                     <td>{pr.repo}</td>
                     <td>
                       <span style={{ color: 'var(--accent-emerald)', marginRight: '6px' }}>+{pr.linesAdded}</span>
@@ -536,7 +536,7 @@ export const AssociateView: React.FC = () => {
               <tbody>
                 {userReviews.map(r => (
                   <tr key={r.id}>
-                    <td style={{ fontWeight: 500, color: '#fff' }}>{r.prTitle}</td>
+                    <td style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{r.prTitle}</td>
                     <td><span className="pill-badge green">{r.verdict}</span></td>
                     <td><strong>{r.substantiveCommentsCount} technical comments</strong></td>
                     <td>
@@ -573,7 +573,7 @@ export const AssociateView: React.FC = () => {
                 {userTests.map(te => (
                   <tr key={te.id}>
                     <td><code>{te.testCaseKey}</code></td>
-                    <td style={{ fontWeight: 500, color: '#fff' }}>{te.title}</td>
+                    <td style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{te.title}</td>
                     <td>{te.suiteName}</td>
                     <td><span className="pill-badge green">{te.result}</span></td>
                     <td>{te.executionDurationMinutes} min</td>
@@ -603,7 +603,7 @@ export const AssociateView: React.FC = () => {
                 {userDocs.map(d => (
                   <tr key={d.id}>
                     <td><span className="pill-badge purple">{d.docType}</span></td>
-                    <td style={{ fontWeight: 500, color: '#fff' }}>{d.title}</td>
+                    <td style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{d.title}</td>
                     <td>{d.wordCount.toLocaleString()} words</td>
                     <td>{d.viewsCount} views</td>
                     <td>{new Date(d.lastModified).toLocaleDateString()}</td>
@@ -618,28 +618,28 @@ export const AssociateView: React.FC = () => {
       {drilldownTab === 'notes' && (
         <div className="glass-card">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-            <h4 style={{ fontSize: '0.95rem', color: '#fff' }}>Recorded Manager Context Notes ({userNotes.length})</h4>
+            <h4 style={{ fontSize: '0.95rem', color: 'var(--text-primary)' }}>Recorded Manager Context Notes ({userNotes.length})</h4>
             {userNotes.map(n => (
-              <div key={n.id} style={{ background: 'rgba(255, 255, 255, 0.03)', padding: '14px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
+              <div key={n.id} style={{ background: 'var(--bg-input)', padding: '14px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
                   <span className="pill-badge green">{n.category}</span>
                   <span style={{ fontSize: '0.78rem', color: 'var(--text-dim)' }}>Recorded by {n.authorName} on {new Date(n.createdAt).toLocaleDateString()}</span>
                 </div>
-                <p style={{ fontSize: '0.85rem', color: '#fff', marginTop: '6px' }}>{n.description}</p>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-primary)', marginTop: '6px' }}>{n.description}</p>
                 <div style={{ fontSize: '0.78rem', color: 'var(--accent-primary-light)', marginTop: '4px' }}>
                   Impact: {n.impactDays} working days • Baseline adjustment: {n.baselineAdjustmentPercent}%
                 </div>
               </div>
             ))}
 
-            <h4 style={{ fontSize: '0.95rem', color: '#fff', marginTop: '14px' }}>Manual Data Overlays ({userManual.length})</h4>
+            <h4 style={{ fontSize: '0.95rem', color: 'var(--text-primary)', marginTop: '14px' }}>Manual Data Overlays ({userManual.length})</h4>
             {userManual.map(m => (
-              <div key={m.id} style={{ background: 'rgba(255, 255, 255, 0.03)', padding: '14px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
+              <div key={m.id} style={{ background: 'var(--bg-input)', padding: '14px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
                   <span className="pill-badge blue">{m.dimension}: {m.metricName}</span>
                   <span style={{ fontSize: '0.78rem', color: 'var(--text-dim)' }}>Signed by {m.enteredBy} on {new Date(m.enteredAt).toLocaleDateString()}</span>
                 </div>
-                <p style={{ fontSize: '0.85rem', color: '#fff', marginTop: '6px' }}>Reason: {m.reason}</p>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-primary)', marginTop: '6px' }}>Reason: {m.reason}</p>
                 <div style={{ fontSize: '0.78rem', color: 'var(--accent-emerald)', marginTop: '4px' }}>
                   Credited Value: +{m.value} {m.unit}
                 </div>
