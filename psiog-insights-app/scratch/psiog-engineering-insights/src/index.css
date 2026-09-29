@@ -706,14 +706,15 @@ body {
 .form-label { font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; display: block; }
 
 /* ── Table ── */
-.data-table { width: 100%; border-collapse: collapse; }
+.data-table { width: 100%; border-collapse: collapse; min-width: 480px; }
 .data-table th {
   text-align: left; padding: 10px 14px;
   font-size: 0.74rem; font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.05em;
   color: var(--text-dim); border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
 }
-.data-table td { padding: 12px 14px; border-bottom: 1px solid var(--border-color); font-size: 0.875rem; color: var(--text-secondary); }
+.data-table td { padding: 12px 14px; border-bottom: 1px solid var(--border-color); font-size: 0.875rem; color: var(--text-secondary); white-space: nowrap; }
 .data-table tbody tr:hover { background: #f9fafb; }
 .data-table tbody tr:last-child td { border-bottom: none; }
 
@@ -933,6 +934,38 @@ body {
 /* ── select & option — ensure dropdown text is always readable ── */
 select { color: var(--text-primary); background: var(--bg-card); }
 select option { color: var(--text-primary); background: #ffffff; }
+
+/* ── Range sliders ── */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border-color);
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--brand-teal);
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--brand-teal);
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+}
+input[type="range"]::-webkit-slider-runnable-track { border-radius: 3px; }
+input[type="range"]::-moz-range-track { height: 6px; border-radius: 3px; background: var(--border-color); }
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 5px; height: 5px; }
