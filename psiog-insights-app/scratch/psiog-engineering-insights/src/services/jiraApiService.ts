@@ -1,4 +1,5 @@
 import { JiraUserSummary } from '../types/jira';
+import { authHeader } from './authApi';
 
 const BASE = '/api/jira';
 
@@ -12,7 +13,7 @@ export async function fetchJiraUserSummary(
   if (options?.projectKey)  params.set('project', options.projectKey);
 
   const qs = params.toString() ? `?${params.toString()}` : '';
-  const res = await fetch(`${BASE}/users/${encodeURIComponent(name)}/summary${qs}`);
+  const res = await fetch(`${BASE}/users/${encodeURIComponent(name)}/summary${qs}`, { headers: authHeader() });
 
   if (!res.ok) {
     const body = await res.text().catch(() => '');

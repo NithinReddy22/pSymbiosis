@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Lock, Shield } from 'lucide-react';
+import { login } from '../../services/authApi';
 
 interface LoginPageProps {
   onLogin: () => void;
@@ -125,11 +126,20 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSignIn = (e: React.FormEvent) => {
+  const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
     setIsLoading(true);
-    setTimeout(() => { setIsLoading(false); onLogin(); }, 900);
+    try {
+      await login(email.trim(), password);
+      onLogin();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Sign in failed');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleMicrosoftLogin = () => {
@@ -190,6 +200,11 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
               autoComplete="current-password"
             />
           </div>
+          {error && (
+            <div role="alert" style={{ color: '#dc2626', fontSize: '0.8rem', marginTop: '10px' }}>
+              {error}
+            </div>
+          )}
           <button type="submit" className="lp-btn-signin" disabled={isLoading}>
             {isLoading ? 'Signing in...' : 'Sign in'}
           </button>

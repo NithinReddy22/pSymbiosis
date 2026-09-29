@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useApp, DatePeriod } from '../../context/AppContext';
 import { UserRole } from '../../types';
+import { getCurrentUser, formatRole, initialsOf } from '../../services/authApi';
 import { Search, Calendar, Bell, ChevronDown, RefreshCw, Check } from 'lucide-react';
 
 export const Header: React.FC = () => {
@@ -38,9 +39,9 @@ export const Header: React.FC = () => {
   };
 
   /* Initials for avatar */
-  const initials = activeAssociate
-    ? activeAssociate.name.split(' ').map(n => n[0]).join('').slice(0, 2)
-    : 'NR';
+  const authUser = getCurrentUser();
+  const displayName = authUser?.name ?? activeAssociate?.name ?? '';
+  const initials = initialsOf(displayName) || 'U';
 
   return (
     <header className="top-header">
@@ -115,8 +116,8 @@ export const Header: React.FC = () => {
         <div className="header-user">
           <div className="header-avatar">{initials}</div>
           <div>
-            <div className="header-user-name">{activeAssociate?.name ?? 'Nithin Reddy'}</div>
-            <div className="header-user-role">{activeAssociate?.title ?? userRole}</div>
+            <div className="header-user-name">{displayName}</div>
+            <div className="header-user-role">{authUser ? formatRole(authUser.role) : activeAssociate?.title ?? userRole}</div>
           </div>
         </div>
       </div>

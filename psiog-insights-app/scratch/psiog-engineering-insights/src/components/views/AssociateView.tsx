@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
+import { getCurrentUser } from '../../services/authApi';
 import { ScoreBadge } from '../common/ScoreBadge';
 import { ExplainModal } from '../common/ExplainModal';
 import { ContextNoteModal } from '../common/ContextNoteModal';
@@ -56,6 +57,12 @@ export const AssociateView: React.FC = () => {
   const currentAssociate = associates.find(a => a.id === effectiveAssociateId) || associates[0];
   const report = allReports.find(r => r.associateId === currentAssociate.id);
 
+  // When viewing your own profile, show the name/email you signed in with
+  const authUser = getCurrentUser();
+  const isSelf = currentAssociate.id === currentUserId;
+  const profileName = isSelf && authUser ? authUser.name : currentAssociate.name;
+  const profileEmail = isSelf && authUser ? authUser.email : currentAssociate.email;
+
   // Associated tool identities
   const userIdentities = identities.filter(id => id.associateId === currentAssociate.id);
 
@@ -86,7 +93,7 @@ export const AssociateView: React.FC = () => {
           <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
             <img
               src={currentAssociate.avatar}
-              alt={currentAssociate.name}
+              alt={profileName}
               style={{ width: '74px', height: '74px', borderRadius: 'var(--radius-lg)', border: '2px solid var(--accent-primary-light)', objectFit: 'cover' }}
             />
             <div>
@@ -100,13 +107,13 @@ export const AssociateView: React.FC = () => {
                   >
                     {associates.map(a => (
                       <option key={a.id} value={a.id} style={{ background: '#ffffff', color: 'var(--text-primary)' }}>
-                        {a.name} ({a.title})
+                        {a.id === currentUserId && authUser ? authUser.name : a.name} ({a.title})
                       </option>
                     ))}
                   </select>
                 ) : (
                   <h1 style={{ fontSize: '1.45rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-                    {currentAssociate.name}
+                    {profileName}
                   </h1>
                 )}
                 <span className="pill-badge blue">{currentAssociate.primaryOffering}</span>
@@ -115,7 +122,7 @@ export const AssociateView: React.FC = () => {
               <div style={{ display: 'flex', gap: '16px', marginTop: '6px', fontSize: '0.82rem', color: 'var(--text-muted)', flexWrap: 'wrap' }}>
                 <span>{currentAssociate.title}</span>
                 <span>•</span>
-                <span>{currentAssociate.email}</span>
+                <span>{profileEmail}</span>
                 <span>•</span>
                 <span>{currentAssociate.location}</span>
                 <span>•</span>

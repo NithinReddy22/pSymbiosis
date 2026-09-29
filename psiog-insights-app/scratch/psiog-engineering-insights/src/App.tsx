@@ -15,6 +15,7 @@ import { JiraSummaryView } from './components/views/JiraSummaryView';
 import { ServiceDeliveryView } from './components/views/ServiceDeliveryView';
 import { DashboardView } from './components/views/DashboardView';
 import { LoginPage } from './components/auth/LoginPage';
+import { getSession, logout } from './services/authApi';
 
 const MainLayout: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
   const { activeTab, setActiveTab, userRole } = useApp();
@@ -54,7 +55,12 @@ const MainLayout: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
 };
 
 export const App: React.FC = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => getSession() !== null);
+
+  const handleLogout = () => {
+    logout();
+    setIsAuthenticated(false);
+  };
 
   if (!isAuthenticated) {
     return <LoginPage onLogin={() => setIsAuthenticated(true)} />;
@@ -62,7 +68,7 @@ export const App: React.FC = () => {
 
   return (
     <AppProvider>
-      <MainLayout onLogout={() => setIsAuthenticated(false)} />
+      <MainLayout onLogout={handleLogout} />
     </AppProvider>
   );
 };

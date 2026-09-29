@@ -1,4 +1,5 @@
 // Client for the backend Dashboard API (proxied to localhost:8080 by Vite, see vite.config.ts).
+import { authHeader } from './authApi';
 
 export interface ScoreComponent {
   metric: string;
@@ -72,7 +73,10 @@ export interface DeveloperDetail {
 const BASE = '/api/dashboard';
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(`${BASE}${path}`, init);
+  const res = await fetch(`${BASE}${path}`, {
+    ...init,
+    headers: { ...authHeader(), ...init?.headers },
+  });
   if (!res.ok) {
     let msg = `${res.status} ${res.statusText}`;
     try {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
+import { getCurrentUser } from '../../services/authApi';
 import {
   TrendingUp, Info, Layers, User as UserIcon, ArrowRight,
   GitMerge, Tag, CheckCircle2, FileText, Sparkles, ArrowUpRight,
@@ -74,7 +75,7 @@ const activityIcons: Record<string, React.ReactNode> = {
 export const HomeView: React.FC = () => {
   const { activeAssociate, selectedAssociateReport, allReports, associates, setActiveTab } = useApp();
 
-  const firstName = activeAssociate?.name?.split(' ')[0] ?? 'there';
+  const firstName = (getCurrentUser()?.name ?? activeAssociate?.name)?.split(' ')[0] ?? 'there';
   const report = selectedAssociateReport;
   const score = report?.overallScore ?? 82;
 

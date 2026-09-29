@@ -5,6 +5,7 @@ import {
 import {
   dashboardApi, DashboardOverview, DeveloperDetail, DeveloperSummary,
 } from '../../services/dashboardApi';
+import { getSession } from '../../services/authApi';
 
 const BAND_COLOR: Record<string, string> = {
   STRONG: '#10b981', ON_TRACK: '#4B9EF8', NEEDS_ATTENTION: '#f59e0b', AT_RISK: '#f43f5e',
@@ -18,6 +19,50 @@ const Bar: React.FC<{ value: number; max: number; color: string }> = ({ value, m
   </div>
 );
 
+const DeveloperDetailBody: React.FC<{ detail: DeveloperDetail }> = ({ detail }) => (
+  <>
+          <h4 style={{ margin: '8px 0' }}>How the score was built</h4>
+          {detail.metrics.scoreBreakdown.map(c => (
+            <div key={c.metric} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.83rem', padding: '4px 0', borderBottom: '1px solid #f3f5f8', color: c.included ? undefined : 'var(--text-muted)' }}>
+              <span>{c.metric}: {c.value}</span>
+              <span>{c.included ? `${c.contribution} pts (${Math.round((c.effectiveWeight ?? 0) * 100)}%)` : c.note ?? 'not scored'}</span>
+            </div>
+          ))}
+          <h4 style={{ margin: '16px 0 8px' }}>Stories</h4>
+          <table className="psiog-table">
+            <thead><tr><th>Key</th><th>Title</th><th>Pts</th><th>Status</th></tr></thead>
+            <tbody>
+              {detail.stories.map(s => (
+                <tr key={s.storyId}>
+                  <td><a href={s.jiraUrl} target="_blank" rel="noreferrer">{s.storyId} <ExternalLink size={11} /></a></td>
+                  <td>{s.title}</td><td>{s.storyPoints}</td><td>{s.status.replace(/_/g, ' ')}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <h4 style={{ margin: '16px 0 8px' }}>Pull Requests</h4>
+          <table className="psiog-table">
+            <thead><tr><th>PR</th><th>Repo</th><th>Commits</th><th>+/−</th><th>Merged</th></tr></thead>
+            <tbody>
+              {detail.pullRequests.map(p => (
+                <tr key={p.pullRequestId}>
+                  <td>{p.pullRequestId}</td><td>{p.repository}</td><td>{p.commits}</td>
+                  <td>+{p.linesAdded} / −{p.linesRemoved}</td><td>{p.merged ? 'Yes' : 'No'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {detail.insights.length > 0 && (
+            <>
+              <h4 style={{ margin: '16px 0 8px' }}>Insights</h4>
+              <ul style={{ paddingLeft: 18, fontSize: '0.86rem' }}>
+                {detail.insights.map((i, idx) => <li key={idx}>{i}</li>)}
+              </ul>
+            </>
+          )}
+  </>
+);
+
 export const DashboardView: React.FC = () => {
   const [data, setData] = useState<DashboardOverview | null>(null);
   const [from, setFrom] = useState('');
@@ -26,20 +71,29 @@ export const DashboardView: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [syncMsg, setSyncMsg] = useState<string | null>(null);
   const [syncing, setSyncing] = useState(false);
+  const [own, setOwn] = useState<DeveloperDetail | null>(null);
   const [detail, setDetail] = useState<DeveloperDetail | null>(null);
   const [detailError, setDetailError] = useState<string | null>(null);
+
+  // Employees may only open their own dashboard; the team overview is forbidden for them.
+  const session = getSession();
+  const isEmployee = session?.user.role === 'EMPLOYEE';
 
   const load = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
+      if (isEmployee && session) {
+        setOwn(await dashboardApi.developer(session.user.id));
+        return;
+      }
       setData(await dashboardApi.overview(from || undefined, to || undefined));
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Failed to load dashboard');
     } finally {
       setLoading(false);
     }
-  }, [from, to]);
+  }, [from, to, isEmployee]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => { load(); }, [load]);
 
@@ -111,7 +165,16 @@ export const DashboardView: React.FC = () => {
           <button className="btn btn-secondary btn-sm" onClick={load}>Retry</button>
         </div>
       )}
-      {loading && !data && <p style={{ color: 'var(--text-muted)' }}>Loading…</p>}
+      {loading && !data && !own && <p style={{ color: 'var(--text-muted)' }}>Loading…</p>}
+
+      {own && (
+        <div className="glass-card" style={{ marginBottom: 24 }}>
+          <h3 style={{ marginBottom: 12 }}>
+            {own.metrics.name} — score {own.metrics.score} (rank {own.metrics.rank}/{own.teamSize})
+          </h3>
+          <DeveloperDetailBody detail={own} />
+        </div>
+      )}
 
       {data && (
         <>
@@ -236,49 +299,7 @@ export const DashboardView: React.FC = () => {
               <button className="btn btn-secondary btn-sm" onClick={() => { setDetail(null); setDetailError(null); }}><X size={14} /></button>
             </div>
             {detailError && <p>{detailError}</p>}
-            {detail && (
-              <>
-                <h4 style={{ margin: '8px 0' }}>How the score was built</h4>
-                {detail.metrics.scoreBreakdown.map(c => (
-                  <div key={c.metric} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.83rem', padding: '4px 0', borderBottom: '1px solid #f3f5f8', color: c.included ? undefined : 'var(--text-muted)' }}>
-                    <span>{c.metric}: {c.value}</span>
-                    <span>{c.included ? `${c.contribution} pts (${Math.round((c.effectiveWeight ?? 0) * 100)}%)` : c.note ?? 'not scored'}</span>
-                  </div>
-                ))}
-                <h4 style={{ margin: '16px 0 8px' }}>Stories</h4>
-                <table className="psiog-table">
-                  <thead><tr><th>Key</th><th>Title</th><th>Pts</th><th>Status</th></tr></thead>
-                  <tbody>
-                    {detail.stories.map(s => (
-                      <tr key={s.storyId}>
-                        <td><a href={s.jiraUrl} target="_blank" rel="noreferrer">{s.storyId} <ExternalLink size={11} /></a></td>
-                        <td>{s.title}</td><td>{s.storyPoints}</td><td>{s.status.replace(/_/g, ' ')}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-                <h4 style={{ margin: '16px 0 8px' }}>Pull Requests</h4>
-                <table className="psiog-table">
-                  <thead><tr><th>PR</th><th>Repo</th><th>Commits</th><th>+/−</th><th>Merged</th></tr></thead>
-                  <tbody>
-                    {detail.pullRequests.map(p => (
-                      <tr key={p.pullRequestId}>
-                        <td>{p.pullRequestId}</td><td>{p.repository}</td><td>{p.commits}</td>
-                        <td>+{p.linesAdded} / −{p.linesRemoved}</td><td>{p.merged ? 'Yes' : 'No'}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-                {detail.insights.length > 0 && (
-                  <>
-                    <h4 style={{ margin: '16px 0 8px' }}>Insights</h4>
-                    <ul style={{ paddingLeft: 18, fontSize: '0.86rem' }}>
-                      {detail.insights.map((i, idx) => <li key={idx}>{i}</li>)}
-                    </ul>
-                  </>
-                )}
-              </>
-            )}
+            {detail && <DeveloperDetailBody detail={detail} />}
           </div>
         </div>
       )}
