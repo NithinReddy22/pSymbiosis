@@ -53,8 +53,7 @@ export const Sidebar: React.FC = () => {
     { id: 'identity',     label: 'Organization',        icon: Building2,
       badge: orphanCount > 0 ? `${orphanCount}` : undefined, show: isLead },
     { id: 'models',       label: 'Performance Model',   icon: Sliders,       show: isHead },
-    { id: 'identity',     label: 'Users & Access',      icon: ShieldCheck,   show: isHead },
-    { id: 'manual-data',  label: 'Settings',            icon: Settings,      show: true },
+    { id: 'manual-data',  label: 'Audit Log',           icon: ShieldCheck,   show: isHead },
   ];
 
   const visibleMain  = mainNav.filter(i => i.show !== false);
